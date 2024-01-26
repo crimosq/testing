@@ -3,17 +3,19 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomePage from './components/HomePage';
 import QuizPage from './components/QuizPage';
+import AccountPage from './components/Account';
 import Footer from './components/Footer';
 
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Router>
         < NavBar />
         <Routes>
           <Route path="/" element={< HomePage />} />
           <Route path="/quizPage" element= {<QuizPage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
         < Footer />
       </Router>
