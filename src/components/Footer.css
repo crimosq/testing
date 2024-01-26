@@ -1,0 +1,37 @@
+.footer {
+    width: 100%;
+    background: #1C96F3;
+    color: #fff;
+    padding: 30px;
+}
+
+.footer-section {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-quote  {
+    width: 50%;
+    padding: 20px;
+    font-weight: 600;
+}
+
+.footer-links {
+    padding: 8px;
+}
+
+.footer-links h2 {
+    text-align: center;
+}
+
+.footer-links li {
+    list-style: none;
+    padding: 8px;
+}
+
+.footer-copyright {
+    text-align: center;
+}
+
