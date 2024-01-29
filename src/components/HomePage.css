@@ -8,18 +8,14 @@
 .homepage-top h1 {
     font-size: 3rem;
     font-weight: 600;
-    color: #000;
+    color: #fff;
     margin-bottom: 50px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 h1 span {
-    /* color: #00CC66; */
-
-}
-
-.homepage-top img {
-    width: 30%;
-    margin: 30px auto;
+    color: #063661;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .homepage-top button {
@@ -28,11 +24,11 @@ h1 span {
     font-weight: 600;
     border: none;
     border-radius: 5px;
-    background: #00CC66;
+    background: #063661;
     color: #fff;
     cursor: pointer;
     transition: all 0.3s ease;
-
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -62,14 +58,14 @@ h1 span {
     font-weight: 500;
 }
 
-/* .box-color1 {
-    background-color: #D90368;
+.box-color1 {
+    background-color: #2d70ae;
 }
 
 .box-color2 {
-    background-color: #F1C40F;
+    background-color: #f0aa29;
 }
 
 .box-color3 {
-    background-color: #F75C03;
-} */
+    background-color: #d6546e;
+}
