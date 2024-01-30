@@ -19,15 +19,15 @@ class NavBar extends Component {
         <img src={Logo} alt="LRNR logo" />
         </div>
 
-          <ul className="nav-menu">
+          <ul className={ this.state.clicked ? "nav-menu" : "nav-menu active" }>
               <li><Link style={{textDecoration: 'none', color: '#fff'}} to="/">Home</Link></li>
               <li><Link style={{textDecoration: 'none', color: '#fff'}} to="/QuizPage">Quiz</Link></li>
               <li><Link style={{textDecoration: 'none', color: '#fff'}} to="/Account">Account</Link></li>    
           </ul>
-      </nav>
       <div className="mobile-navbar" onClick={this.handleClick}>
       <i id='bar' className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
     </div>
+    </nav>
     </div>
 
   );
