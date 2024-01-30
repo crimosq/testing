@@ -4,26 +4,31 @@ import './Account.css';
 export default function Account() {
   return (
     <div className='account-page'>
-        <h1>Welcome Back!</h1>
-        <p>Take a look at your success</p>
-
         <div className="account-container">
-        <i class="fa fa-camera-retro fa-3x"></i>
-            <div className="account-box">
-                <h2>Streak</h2>
-                <p>You have a streak of 5 days!</p>
-            </div>
-            <div className="account-box">
-            <i class="fa fa-camera-retro fa-3x"></i>
-                <h2>Platinum Quizzes</h2>
-                <p>Golang - intermediate</p>
-                <p>Javascript - beginner</p>
-                <p>AWS - beginner</p>
-            </div>
-            <div className="account-box">
-            <i class="fa fa-camera-retro fa-3x"></i>
-                <h2>lrnr Level: 2</h2>
+        <div className="level-box">
+                <i class="fa-solid fa-circle-notch fa-8x"></i>
+                <h2>lrnr Level:</h2>
+                <span>2</span>
                 <p>150/200 xp</p>
+                <p className='note'>Supercharge your progress by diving into more quizzes to boost XP!</p>
+            </div>
+            <div className="stacked-account-container">
+            <h1>Welcome Back!</h1>
+            <p className='account-title'>Take a look at your success</p>
+            <div className="streak-box">
+            <i class="fa-solid fa-fire fa-4x"></i>
+                <h2>Streak</h2>
+                <p>You have a streak of <span>5</span> days!</p>
+            </div>
+            <div className="platinum-box">
+            <i class="fa-solid fa-certificate fa-4x"></i>
+                <h2>Platinum Quizzes</h2>
+                <ul>
+                  <li>Golang - Intermediate</li>
+                  <li>Javascript - Beginner</li>
+                  <li>AWS - Beginner</li>
+                </ul>
+            </div>
             </div>
       </div>
     </div>

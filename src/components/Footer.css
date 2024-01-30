@@ -35,3 +35,29 @@
     text-align: center;
 }
 
+
+
+
+
+@media only screen and (max-width: 530px) {
+    .footer-section {
+        display: block;
+    }
+
+    .footer-quote {
+        width: 100%;
+    }
+
+    .footer-quote p {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .footer-links li {
+        text-align: center;
+    }
+
+    .footer-links h2 {
+        margin-left: 40px;
+    }
+}

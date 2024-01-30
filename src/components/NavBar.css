@@ -26,11 +26,11 @@
     cursor: pointer;
 }
 
-.mobile {
+.mobile-navbar {
     display: none;
 }
 
-.mobile i {
+.mobile-navbar i {
 color: #fff;
 align-items: center;
 }
@@ -51,16 +51,31 @@ align-items: center;
         padding: 40px 0 0 10px;
     }
 
+    .nav-menu.active {
+        right: -300px;
+    }
+
+    .nav-logo img {
+        width: 40%;
+    }
+
     .nav-menu li {
         margin-bottom: 25px;
     }
      
-    .mobile {
+    .mobile-navbar {
         display: block;
     }
 
-    .mobile i {
+    .mobile-navbar i {
         font-size: 24px;
         cursor: pointer;
     }
+}
+
+@media screen and (min-width: 761px) and (max-width: 1024px){
+    .nav-logo img {
+        width: 40%;
+    }
+    
 }
