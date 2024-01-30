@@ -18,7 +18,7 @@ const QuizPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    console.log(formData)
     try {
       const response = await fetch('http://localhost:5000/QuizPage', {
         method: 'POST',
@@ -95,4 +95,3 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
-
