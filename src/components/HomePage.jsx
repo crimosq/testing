@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomePage.css';
-import { motion as m } from 'framer-motion';
+// import { motion as m } from 'framer-motion';
 
 export default function HomePage() {
   return (
