@@ -47,29 +47,45 @@ const QuizPage = () => {
             <div>
                 <label for="language">Choose a programming topic:</label>
                 <select id="language" name="language" onChange={handleInputChange}>
-  <option value="python">Python</option>
-  <option value="javascript">JavaScript</option>
-  <option value="java">Java</option>
-  <option value="c">C</option>
-</select>
+                    <option value="" disabled></option>
+                    <option value="golang">Golang</option>
+                    <option value="aws">AWS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="ci/cd">CI/CD</option>
+                    <option value="home gardens">Home gardens</option>
+                    <option value="coffee">Coffee</option>
+                    <option value="finger foods">Finger Foods</option>
+                </select>
             </div>
             <div>
                 <label for="difficulty">Choose a difficulty level:</label>
                 <select id="difficulty" name="difficulty">
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
+                    <option value="" disabled></option>
+                    <option value="novice">Novice</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="expert">Expert</option>
                 </select>
             </div>
             <div>
                 <label for="number">Choose number of questions:</label>
-                <input type="number" id="number" name="number" min="1" max="10" />
+                <select type="number" id="number" name="number">
+                    <option value="" disabled></option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
             </div>
             <div>
                 <label for="type">Choose question style:</label>
                 <select id="type" name="type">
-                    <option value="multiple">Multiple Choice</option>
-                    <option value="boolean">True/False</option>
+                    <option value="" disabled></option>
+                    <option value="master oogway">Master Oogway</option>
+                    <option value="1940s Gangster">1940s Gangster</option>
+                    <option value="Like I'm an 8 year old">Like I'm an 8 year old</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Jedi">Jedi</option>
+                    <option value="Captain Jack Sparrow">Captain Jack Sparrow</option>
+                    <option value="Matthew McConaughey">Matthew McConaughey</option>
                 </select>
             </div>
             <button type="submit">Generate Quiz</button>
@@ -79,17 +95,3 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
