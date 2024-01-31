@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const openai = new OpenAI({ apiKey: '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' });
+const openai = new OpenAI({ apiKey: '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' });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -40,20 +40,3 @@ app.post('/QuizPage', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
