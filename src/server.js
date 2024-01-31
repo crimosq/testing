@@ -28,7 +28,7 @@ app.post('/QuizPage', async (req, res) => {
       response_format: { type: 'text' },
     });
 
-    const generatedQuiz = completion.choices.message.content;
+    const generatedQuiz = completion.choices[0].message.content;
     console.log(`Generated quiz: ${generatedQuiz}`);
 
     res.send(generatedQuiz);
