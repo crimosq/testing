@@ -100,8 +100,4 @@ const QuizPage = () => {
     </div>
   );
 };
-
 export default QuizPage;
-
-
-
