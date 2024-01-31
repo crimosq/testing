@@ -1,6 +1,8 @@
-import './QuizPage.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './QuizPage.css';
+// const OpenAI = require('openai');
+
 
 const QuizPage = () => {
   const navigate = useNavigate();
@@ -47,7 +49,6 @@ const QuizPage = () => {
     <div className='quiz-page'>
       <h1>Personalize Your Quiz</h1>
       <p>Please choose your preferences below to generate your personalized quiz</p>
-
       <form onSubmit={handleSubmit}>
       <div>
                 <label for="language">Choose a programming topic:</label>
