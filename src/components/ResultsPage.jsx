@@ -1,13 +1,19 @@
-import React from 'react';
+
 import './ResultsPage.css';
 
-export default function ResultsPage() {
+
+import React from 'react';
+
+const ResultsPage = ({ answers }) => {
+  // Process and display results based on 'answers'
+
   return (
     <div>
-      <h1>Results from your lrnr quiz</h1>
-        <div className="results-container">
+      <h2>Results Page</h2>
 
-        </div>
+      {/* Display results here */}
     </div>
-  )
-}
+  );
+};
+
+export default ResultsPage;
