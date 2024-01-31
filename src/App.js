@@ -5,6 +5,8 @@ import HomePage from './components/HomePage';
 import QuizPage from './components/QuizPage';
 import AccountPage from './components/Account';
 import Footer from './components/Footer';
+import TestPage from './components/TestPage';
+
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
           <Route path="/" element={< HomePage />} />
           <Route path="/quizPage" element= {<QuizPage />} />
           <Route path="/account" element={<AccountPage />} />
+          <Route path="/test" element={<TestPage />} />
         </Routes>
         < Footer />
       </Router>
