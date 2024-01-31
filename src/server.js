@@ -4,11 +4,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 require('dotenv').config(); // Load environment variables from .env file
 const apiKey = process.env.API_KEY; // Access the API key from environment variables
 const openai = new OpenAI({ apiKey }); // Pass the API key to OpenAI constructor
+
 app.use(cors());
 app.use(bodyParser.json());
+
 app.post('/QuizPage', async (req, res) => {
   try {
     const { language, difficulty, number, type } = req.body;
