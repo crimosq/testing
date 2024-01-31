@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const openai = new OpenAI({ apiKey: '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' });
+const openai = new OpenAI({ apiKey: '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' });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,7 +20,10 @@ app.post('/QuizPage', async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
         { role: 'system', content: 'You are a quiz assistant.' },
-        { "role": "user", "content": `Create a quiz based on ${language} programming with difficulty level ${difficulty}, ${number} questions, and question style ${type}. Please provide ${number} questions for the quiz. Each question should be followed by a blank space for the user to input their answer.` },      ],
+        { "role": "user", "content": `Create a quiz based on ${language} programming with difficulty level ${difficulty}, 
+        ${number} questions, and question style ${type}. Please provide ${number} questions for the quiz. Each question 
+        should be followed by a blank space for the user to input their answer.` },      
+      ],
       model: 'gpt-3.5-turbo',
       response_format: { type: 'text' },
     });
