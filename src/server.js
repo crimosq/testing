@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const openai = new OpenAI({ apiKey: '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' });
+const openai = new OpenAI({ apiKey: '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' });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,12 +20,15 @@ app.post('/QuizPage', async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
         { role: 'system', content: 'You are a quiz assistant.' },
-        { "role": "user", "content": `Create a quiz based on ${language} programming with difficulty level ${difficulty}, ${number} questions, and question style ${type}. Please provide ${number} questions for the quiz. Each question should be followed by a blank space for the user to input their answer.` },      ],
+        { "role": "user", "content": `Generate open ended questions based on ${language} programming with difficulty level ${difficulty}, 
+        ${number} questions, and the style of questions depending on ${type}. Please provide ${number} questions for the quiz. 
+        The question should not be multiple choice.` }
+      ],
       model: 'gpt-3.5-turbo',
       response_format: { type: 'text' },
     });
 
-    const generatedQuiz = completion.choices[0].message.content;
+    const generatedQuiz = completion.choices.message.content;
     console.log(`Generated quiz: ${generatedQuiz}`);
 
     res.send(generatedQuiz);
