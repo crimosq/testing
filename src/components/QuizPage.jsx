@@ -47,6 +47,7 @@ const QuizPage = () => {
     <div className='quiz-page'>
       <h1>Personalize Your Quiz</h1>
       <p>Please choose your preferences below to generate your personalized quiz</p>
+
       <form onSubmit={handleSubmit}>
       <div>
                 <label for="language">Choose a programming topic:</label>
@@ -101,4 +102,6 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
+
+
 
