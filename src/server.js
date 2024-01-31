@@ -20,10 +20,7 @@ app.post('/QuizPage', async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
         { role: 'system', content: 'You are a quiz assistant.' },
-        { "role": "user", "content": `Create a quiz based on ${language} programming with difficulty level ${difficulty}, 
-        ${number} questions, and question style ${type}. Please provide ${number} questions for the quiz. Each question 
-        should be followed by a blank space for the user to input their answer.` },      
-      ],
+        { "role": "user", "content": `Create a quiz based on ${language} programming with difficulty level ${difficulty}, ${number} questions, and question style ${type}. Please provide ${number} questions for the quiz. Each question should be followed by a blank space for the user to input their answer.` },      ],
       model: 'gpt-3.5-turbo',
       response_format: { type: 'text' },
     });
