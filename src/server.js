@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const openai = new OpenAI({ apiKey: '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' });
 
 app.use(cors());
 app.use(bodyParser.json());
