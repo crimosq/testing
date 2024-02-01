@@ -19,16 +19,17 @@ app.post('/QuizPage', async (req, res) => {
     console.log('Received form data:', { language, difficulty, number, type });
     const completion = await openai.chat.completions.create({
       messages: [
-        { role: 'system', content: 'You are a quiz assistant.' },
-        { role: 'user', content: `Generate open-ended questions based on ${language} programming with difficulty level ${difficulty},
-        ${number} questions, and the style of questions depending on ${type}. Please provide ${number} questions for the quiz.
-        The question should not be multiple choice.` },
+
+        { role: 'system', content: `Create a series of ${number} open-ended ${difficulty} difficulty questions on ${language} programming, focusing on ${type} aspects. The questions should engage critical thinking and understanding.` }
+
       ],
       model: 'gpt-3.5-turbo',
       response_format: { type: 'text' },
     });
 
-    const generatedQuiz = completion.choices?.[0]?.message?.content;
+
+    const generatedQuiz = completion.choices[0].message.content;
+
     console.log(`Generated quiz: ${generatedQuiz}`);
     res.send(generatedQuiz);
   } catch (error) {
@@ -37,6 +38,34 @@ app.post('/QuizPage', async (req, res) => {
   }
 });
 
+
+app.post('/gradeAnswers', async (req, res) => {
+  try {
+    const { answers, questions } = req.body;
+    let gradingScript = questions.map((question, index) => {
+      return {
+        role: "system",
+        content: `Evaluate the following answer given the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is constructive and supportive, aimed at fostering learning and improvement. Highlight what was done well and areas for growth, rather than focusing solely on correctness.`
+      };
+    });
+
+    gradingScript.unshift({role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive, highlighting strengths and gently suggesting improvements for any inaccuracies or areas lacking depth."});
+
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: gradingScript,
+    });
+
+    const generatedMessageContent = completion.choices[0].message.content;
+
+    res.json({ gradingResult: generatedMessageContent });
+  } catch (error) {
+    console.error('Error in /gradeAnswers:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
