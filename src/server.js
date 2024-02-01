@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Initialize OpenAI with your API key
-const openai = new OpenAI({ apiKey: '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' });
+require('dotenv').config(); // Load environment variables from .env file
+const apiKey = process.env.API_KEY; // Access the API key from environment variables
+const openai = new OpenAI({ apiKey }); // Pass the API key to OpenAI constructor
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,24 +17,27 @@ app.post('/QuizPage', async (req, res) => {
   try {
     const { language, difficulty, number, type } = req.body;
     console.log('Received form data:', { language, difficulty, number, type });
-
     const completion = await openai.chat.completions.create({
       messages: [
+
         { role: 'system', content: `Create a series of ${number} open-ended ${difficulty} difficulty questions on ${language} programming, focusing on ${type} aspects. The questions should engage critical thinking and understanding.` }
+
       ],
       model: 'gpt-3.5-turbo',
       response_format: { type: 'text' },
     });
 
-    const generatedQuiz = completion.choices[0].message.content;
-    console.log(`Generated quiz: ${generatedQuiz}`);
 
+    const generatedQuiz = completion.choices[0].message.content;
+
+    console.log(`Generated quiz: ${generatedQuiz}`);
     res.send(generatedQuiz);
   } catch (error) {
     console.error('Error in /QuizPage:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 app.post('/gradeAnswers', async (req, res) => {
   try {
@@ -64,3 +68,4 @@ app.post('/gradeAnswers', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
