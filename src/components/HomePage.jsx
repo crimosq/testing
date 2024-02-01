@@ -1,5 +1,7 @@
 import React from 'react';
 import './HomePage.css';
+import ResultsPage from './ResultsPage';
+import { Link } from 'react-router-dom';
 // import { motion as m } from 'framer-motion';
 
 export default function HomePage() {
@@ -7,7 +9,7 @@ export default function HomePage() {
     <div>
       <div className="homepage-top">
         <h1>Your guided path to <span>programming enlightenment</span></h1>
-        <button>Begin Learning</button>
+        <Link to="/results"><button>Begin Learning</button></Link>
       </div>
 
       <div className="container">

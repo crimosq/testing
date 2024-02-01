@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import HomePage from './components/HomePage';
 import QuizPage from './components/QuizPage';
 import AccountPage from './components/Account';
+import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
 import TestPage from './components/TestPage';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/quizPage" element= {<QuizPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/test" element={<TestPage />} />
+          <Route path="/results" element={<ResultsPage />} />
         </Routes>
         < Footer />
       </Router>
