@@ -100,5 +100,6 @@ const QuizPage = () => {
       </form>
     </div>
   );
+  
 };
 export default QuizPage;
