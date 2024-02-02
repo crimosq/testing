@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css'
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -9,9 +10,9 @@ export default function Footer() {
         <div className="footer-links">
         <h2>Links</h2>
       <ul>
-        <li>Home</li>
-        <li>Quiz Generator</li>
-        <li>Account</li>
+        <li><Link style={{textDecoration: 'none', color: '#fff'}} to="/">Home</Link></li>
+        <li><Link style={{textDecoration: 'none', color: '#fff'}} to="/QuizPage">Quiz Generator</Link></li>
+        <li><Link style={{textDecoration: 'none', color: '#fff'}} to="/Account">Account</Link></li>    
       </ul>
       </div>
       </div>

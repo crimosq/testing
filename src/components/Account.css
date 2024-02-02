@@ -100,7 +100,6 @@
     font-size: 1.8rem;
 }
 
-
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .account-container {
       flex-direction: column;
