@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
+import { motion as m } from 'framer-motion';
 
 const TestPage = () => {
   const location = useLocation();
@@ -41,6 +42,11 @@ const TestPage = () => {
   };
 
   return (
+    <m.div 
+    initial= {{opacity: 0}} 
+    animate= {{opacity: 1}} 
+    transition={{duration: 0.75, ease: "easeOut"}}
+    >
     <div>
       <h2>Test Page</h2>
       {generatedQuiz ? (
@@ -69,6 +75,7 @@ const TestPage = () => {
       )}
       {gradingResult && <div><h3>Grading Result</h3><p>{gradingResult}</p></div>}
     </div>
+    </m.div>
   );
 };
 
