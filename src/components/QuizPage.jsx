@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './QuizPage.css';
+import { motion as m } from 'framer-motion';
+
 // const OpenAI = require('openai');
 
 
@@ -46,6 +48,11 @@ const QuizPage = () => {
     }
   };
   return (
+    <m.div 
+    initial= {{opacity: 0}} 
+    animate= {{opacity: 1}} 
+    transition={{duration: 0.75, ease: "easeOut"}}
+    >
     <div className='quiz-page'>
       <h1>Personalize Your Quiz</h1>
       <p>Please choose your preferences below to generate your personalized quiz</p>
@@ -99,6 +106,7 @@ const QuizPage = () => {
         </div>
       </form>
     </div>
+    </m.div>
   );
   
 };
