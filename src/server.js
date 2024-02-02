@@ -45,11 +45,13 @@ app.post('/gradeAnswers', async (req, res) => {
     let gradingScript = questions.map((question, index) => {
       return {
         role: "system",
-        content: `Evaluate the following answer given the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is constructive and supportive, aimed at fostering learning and improvement. Highlight what was done well and areas for growth, rather than focusing solely on correctness.`
+        content: `Evaluate the following answer given the question: "${question}" and the student's answer: 
+        "${answers[index]}". Provide feedback that is no longer then 6 sentences. Answers should be graded on accuracy. Do not take 
+        spelling or grammar into account. Also, provide with incorrect answers, the correct answer.`
       };
     });
 
-    gradingScript.unshift({role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive, highlighting strengths and gently suggesting improvements for any inaccuracies or areas lacking depth."});
+    gradingScript.unshift({role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive."});
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
