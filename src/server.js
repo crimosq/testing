@@ -20,7 +20,17 @@ app.post('/QuizPage', async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
 
-        { role: 'system', content: `Create a series of ${number} open-ended ${difficulty} difficulty questions on ${language} programming, focusing on ${type} aspects. The questions should engage critical thinking and understanding.` }
+        { role: 'system', content: `You are quiz generator with the personality of ${type}. 
+        Include refrence to your of your personality in your everyday life. Expect the quiz 
+        taker to have ${difficulty} level of understanding. Generate a ${number} quiz on ${language}. Do not 
+        include the answer in your response nor any multiple choice. 
+        
+        Format your reposonse like this: 
+        DO NOT INCLUDE ANY INTRUCTIONS IN YOUR RESPONSE.
+        1. sentence based on your personality. question...
+        2. sentence based on your personality. question...
+        etc. 
+        DO NOT PUT TEXT DOWN HERE OR BELOW. ONLY PUT THE QUESTIONS` }
 
       ],
       model: 'gpt-3.5-turbo',
@@ -43,22 +53,22 @@ app.post('/gradeAnswers', async (req, res) => {
   try {
     const { answers, questions } = req.body;
     let gradingScript = questions.map((question, index) => {
-      return {
-        role: "system",
-        content: `Evaluate the following answer given the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is constructive and supportive, aimed at fostering learning and improvement. Highlight what was done well and areas for growth, rather than focusing solely on correctness.`
-      };
+      return [
+        { role: "system", content: `Evaluate the following answer given the question: "${question}" and the student's answer: "${answers[index]}".` },
+        { role: "user", content: answers[index] } // Include the user's answer
+      ];
     });
 
-    gradingScript.unshift({role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive, highlighting strengths and gently suggesting improvements for any inaccuracies or areas lacking depth."});
+    gradingScript.unshift({ role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development." });
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      messages: gradingScript,
+      messages: gradingScript.flat(), // Flatten the array of messages
     });
 
-    const generatedMessageContent = completion.choices[0].message.content;
+    const generatedMessageContent = completion.choices.map(choice => choice.message.content);
 
-    res.json({ gradingResult: generatedMessageContent });
+    res.json({ gradingResults: generatedMessageContent });
   } catch (error) {
     console.error('Error in /gradeAnswers:', error);
     res.status(500).json({ error: 'Internal Server Error' });

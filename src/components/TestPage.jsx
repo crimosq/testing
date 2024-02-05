@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { motion as m } from 'framer-motion';
+import './TestPage.css';
 
 const TestPage = () => {
   const location = useLocation();
   const { state: { generatedQuiz } = {} } = location || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
-  const [gradingResult, setGradingResult] = useState(null);
+  const [gradingResults, setGradingResults] = useState(null); // Update state to hold gradingResults
+
   const totalQuestions = generatedQuiz ? generatedQuiz.split("\n").length : 0;
 
   const handleInputChange = (e) => {
@@ -28,14 +30,19 @@ const TestPage = () => {
     e.preventDefault();
     console.log("User Answers:", userAnswers);
 
-    const questions = generatedQuiz.split("\n");
+    const questions = generatedQuiz.split(";");
 
     try {
       const response = await axios.post('http://localhost:5000/gradeAnswers', {
         answers: Object.values(userAnswers),
         questions: questions
       });
-      setGradingResult(response.data.gradingResult);
+
+      // Update state with gradingResults
+      setGradingResults(response.data.gradingResults);
+
+      // Log the answer to the first question
+      console.log("Answer to the first question:", response.data.gradingResults[0][1]);
     } catch (error) {
       console.error('Error submitting answers:', error);
     }
@@ -73,11 +80,15 @@ const TestPage = () => {
       ) : (
         <p>No quiz generated.</p>
       )}
-      {gradingResult && <div><h3>Grading Result</h3><p>{gradingResult}</p></div>}
+      {gradingResults && (
+  <div>
+    <h3>Grading Result</h3>
+    <p>{gradingResults[0]}</p> {/* Display the answer to the first question */}
+  </div>
+)}
     </div>
     </m.div>
   );
 };
 
 export default TestPage;
-
