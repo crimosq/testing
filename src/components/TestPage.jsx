@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./TestPage.css";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { motion as m } from 'framer-motion';
@@ -54,13 +55,17 @@ const TestPage = () => {
     animate= {{opacity: 1}} 
     transition={{duration: 0.75, ease: "easeOut"}}
     >
-    <div>
-      <h2>Test Page</h2>
+    <div className="test-page">
+      <m.h1
+          initial= {{x: "-100%"}} 
+          animate= {{x: "0%"}} 
+          transition={{duration: 0.75, ease: "easeOut"}}
+      >Ready, set, GO!</m.h1>
       {generatedQuiz ? (
         <div>
           <form onSubmit={handleSubmitAnswers}>
-            <p>Question {currentQuestionIndex + 1}</p>
-            <p>{generatedQuiz.split("\n")[currentQuestionIndex]}</p>
+            <p className="question-number">Question {currentQuestionIndex + 1}</p>
+            <p className="question">{generatedQuiz.split("\n")[currentQuestionIndex]}</p>
             <input
               type="text"
               name="answer"
@@ -73,19 +78,23 @@ const TestPage = () => {
                   Next
                 </button>
               )}
-              <button type="submit">Submit Answers</button>
+              <button type="submit">Submit</button>
             </div>
           </form>
         </div>
       ) : (
         <p>No quiz generated.</p>
       )}
+<<<<<<< HEAD
       {gradingResults && (
   <div>
     <h3>Grading Result</h3>
     <p>{gradingResults[0]}</p> {/* Display the answer to the first question */}
   </div>
 )}
+=======
+      {gradingResult && <div><h3>Grading Evaluation</h3><p className="graded-result">{gradingResult}</p></div>}
+>>>>>>> refs/remotes/origin/ricardo
     </div>
     </m.div>
   );
