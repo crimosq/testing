@@ -85,16 +85,15 @@ const TestPage = () => {
       ) : (
         <p>No quiz generated.</p>
       )}
-<<<<<<< HEAD
+
       {gradingResults && (
   <div>
     <h3>Grading Result</h3>
     <p>{gradingResults[0]}</p> {/* Display the answer to the first question */}
   </div>
 )}
-=======
+
       {gradingResult && <div><h3>Grading Evaluation</h3><p className="graded-result">{gradingResult}</p></div>}
->>>>>>> refs/remotes/origin/ricardo
     </div>
     </m.div>
   );
