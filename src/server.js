@@ -20,7 +20,17 @@ app.post('/QuizPage', async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
 
-        { role: 'system', content: `Create a series of ${number} open-ended ${difficulty} difficulty questions on ${language} programming, focusing on ${type} aspects. The questions should engage critical thinking and understanding.` }
+        { role: 'system', content: `You are quiz generator with the personality of ${type}. 
+        Include refrence to your of your personality in your everyday life. Expect the quiz 
+        taker to have ${difficulty} level of understanding. Generate a ${number} quiz on ${language}. Do not 
+        include the answer in your response nor any multiple choice. 
+        
+        Format your reposonse like this: 
+        DO NOT INCLUDE ANY INTRUCTIONS IN YOUR RESPONSE.
+        1. sentence based on your personality. question...
+        2. sentence based on your personality. question...
+        etc. 
+        DO NOT PUT TEXT DOWN HERE OR BELOW. ONLY PUT THE QUESTIONS` }
 
       ],
       model: 'gpt-3.5-turbo',
@@ -45,11 +55,13 @@ app.post('/gradeAnswers', async (req, res) => {
     let gradingScript = questions.map((question, index) => {
       return {
         role: "system",
-        content: `Evaluate the following answer given the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is constructive and supportive, aimed at fostering learning and improvement. Highlight what was done well and areas for growth, rather than focusing solely on correctness.`
+        content: `Evaluate the following answer given from the question: "${question}" and the student's answer: 
+        "${answers[index]}". Provide feedback that is no longer then 6 sentences. Answers should be graded on accuracy. Do not take 
+        spelling or grammar into account. Also provide a score from 0% - 100%. 0% being the lowest and 100% being the highest.`
       };
     });
 
-    gradingScript.unshift({role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive, highlighting strengths and gently suggesting improvements for any inaccuracies or areas lacking depth."});
+    gradingScript.unshift({role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive."});
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',

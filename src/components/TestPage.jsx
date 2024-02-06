@@ -22,6 +22,7 @@ const TestPage = () => {
   const handleNextQuestion = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setGradingResult(null);
     }
   };
 
@@ -29,7 +30,7 @@ const TestPage = () => {
     e.preventDefault();
     console.log("User Answers:", userAnswers);
 
-    const questions = generatedQuiz.split("\n");
+    const questions = generatedQuiz.split(/\d+\.\s+/).filter(Boolean);
 
     try {
       const response = await axios.post('http://localhost:5000/gradeAnswers', {
@@ -78,7 +79,11 @@ const TestPage = () => {
       ) : (
         <p>No quiz generated.</p>
       )}
-      {gradingResult && <div><h3>Grading Evaluation</h3><p className="graded-result">{gradingResult}</p></div>}
+      {gradingResult && 
+      <div>
+        <h3>Grading Evaluation</h3>
+        <p className="graded-result">{gradingResult}</p>
+      </div>}
     </div>
     </m.div>
   );
