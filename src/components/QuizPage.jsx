@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './QuizPage.css';
 import { motion as m } from 'framer-motion';
 
-// const OpenAI = require('openai');
-
-
 const QuizPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -40,11 +37,9 @@ const QuizPage = () => {
       const generatedQuiz = await response.text();
       console.log('Generated Quiz:', generatedQuiz);
   
-      // Navigate to /test and pass the generatedQuiz value in the state
       navigate('/test', { state: { generatedQuiz } });
     } catch (error) {
       console.error('Error in handleSubmit:', error);
-      // Handle errors as needed
     }
   };
   return (
@@ -57,7 +52,7 @@ const QuizPage = () => {
       <h1>Personalize Your Quiz</h1>
       <p>Please choose your preferences below to generate your personalized quiz</p>
       <form onSubmit={handleSubmit}>
-      <div>
+        <div>
                 <label for="language">Choose a programming topic:</label>
                 <select id="language" name="language" onChange={handleInputChange} required>
                 <option selected="true" disabled="disabled"></option>
@@ -100,7 +95,7 @@ const QuizPage = () => {
                     <option value="Captain Jack Sparrow">Captain Jack Sparrow</option>
                     <option value="Matthew McConaughey">Matthew McConaughey</option>
                 </select>
-                </div>
+            </div>
         <div>
           <button type="submit">Generate Quiz</button>
         </div>

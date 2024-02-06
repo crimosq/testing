@@ -4,11 +4,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
 require('dotenv').config(); // Load environment variables from .env file
-const apiKey = process.env.API_KEY; // Access the API key from environment variables
-const openai = new OpenAI({ apiKey }); // Pass the API key to OpenAI constructor
+ const apiKey = process.env.OPENAI_API_KEY; // Access the API key from environment variables
+
+const openai = new OpenAI({ apiKey: 'My API Key' }); // Pass the API key to OpenAI constructor
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -48,20 +47,20 @@ app.post('/QuizPage', async (req, res) => {
   }
 });
 
-
 app.post('/gradeAnswers', async (req, res) => {
   try {
     const { answers, questions } = req.body;
-    let gradingScript = questions.map((question, index) => {
-      return {
-        role: "system",
-        content: `Evaluate the following answer given from the question: "${question}" and the student's answer: 
-        "${answers[index]}". Provide feedback that is no longer then 6 sentences. Answers should be graded on accuracy. Do not take 
-        spelling or grammar into account. Also provide a score from 0% - 100%. 0% being the lowest and 100% being the highest.`
-      };
-    });
 
-    gradingScript.unshift({role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive."});
+  let gradingScript = [
+      { role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive." }
+    ];
+
+    questions.forEach((question, index) => {
+      gradingScript.push({
+        role: "system",
+        content: `Evaluate the following answer given from the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is no longer than 6 sentences. Answers should be graded on accuracy. Do not take spelling or grammar into account. Also provide a score from 0% - 100%, where 0% represents the lowest and 100% represents the highest score.`
+      });
+    });
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
@@ -76,7 +75,7 @@ app.post('/gradeAnswers', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
