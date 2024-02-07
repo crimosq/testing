@@ -5,8 +5,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 require('dotenv').config(); // Load environment variables from .env file
- const apiKey = process.env.OPENAI_API_KEY; // Access the API key from environment variables
-
+const apiKey = process.env.OPENAI_API_KEY; // Access the API key from environment variables
 const openai = new OpenAI({ apiKey: 'My API Key' }); // Pass the API key to OpenAI constructor
 
 app.use(cors());
