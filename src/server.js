@@ -4,9 +4,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 require('dotenv').config(); // Load environment variables from .env file
- const apiKey = process.env.OPENAI_API_KEY; // Access the API key from environment variables
-
+const apiKey = process.env.OPENAI_API_KEY; // Access the API key from environment variables
 const openai = new OpenAI({ apiKey: 'My API Key' }); // Pass the API key to OpenAI constructor
 
 app.use(cors());
@@ -75,7 +75,7 @@ app.post('/gradeAnswers', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
