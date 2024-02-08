@@ -50,31 +50,29 @@ app.post('/QuizPage', async (req, res) => {
 app.post("/gradeAnswers", async (req, res) => {
   try {
     const {answers, questions} = req.body;
-
-    const completionPromises = questions.map(async (question, index) => {
-      const conversation = [
-        {
-          role: "system",
-          content:
-            "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive.",
-        },
-        {
-          role: "system",
-          content: `Evaluate the following answer given from the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is no longer than 6 sentences. Answers should be graded on accuracy. Do not take spelling or grammar into account. Also provide a score from 0% - 100%, where 0% represents the lowest and 100% represents the highest score.`,
-        },
-        {
-          role: "user",
-          content: answers[index],
-        },
-      ];
-	  const completion = await openai.chat.completions.create({
-		model: "gpt-3.5-turbo",
-		messages: conversation,
-		max_tokens: 3510,
-	  });
-	  return completion.choices[0].message.content;
-    });
-	const gradingResults = await Promise.all(completionPromises);
+    console.log(questions, answers['0'])
+    const conversation = [
+      {
+        role: "system",
+        content:
+          "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive.",
+      },
+      {
+        role: "system",
+        content: `Evaluate the following answer given from the question: "${questions}" and the student's answer: "${answers}". Provide feedback that is no longer than 6 sentences. Answers should be graded on accuracy. Do not take spelling or grammar into account. Also provide a score from 0% - 100%, where 0% represents the lowest and 100% represents the highest score.`,
+      },
+      {
+        role: "user",
+        content: answers,
+      },
+    ];
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: conversation,
+      max_tokens: 3510,
+      });
+      console.log(completion.choices[0].message.content)
+	const gradingResults = completion.choices[0].message.content;
 	console.log(gradingResults);
 	res.json({gradingResult: gradingResults});
 
