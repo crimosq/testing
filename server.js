@@ -19,7 +19,8 @@ app.post('/QuizPage', async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
 
-        { role: 'system', content: `You are quiz generator with the personality of ${type}. 
+        { role: 'system', 
+        content: `You are quiz generator with the personality of ${type}. 
         Include refrence to your of your personality in your everyday life. Expect the quiz 
         taker to have ${difficulty} level of understanding. Generate a ${number} quiz on ${language}. Do not 
         include the answer in your response nor any multiple choice. 
@@ -29,7 +30,7 @@ app.post('/QuizPage', async (req, res) => {
         1. sentence based on your personality. question...
         2. sentence based on your personality. question...
         etc. 
-        DO NOT PUT TEXT DOWN HERE OR BELOW. ONLY PUT THE QUESTIONS` }
+        DO NOT INCLUDE ANY SPACES BETWEEN QUESTIONS` }
 
       ],
       model: 'gpt-3.5-turbo',
@@ -37,7 +38,7 @@ app.post('/QuizPage', async (req, res) => {
     });
 
 
-    const generatedQuiz = completion.choices[0].message.content;
+    const generatedQuiz = completion.choices[0].message.content.trim("");
 
     console.log(`Generated quiz: ${generatedQuiz}`);
     res.send(generatedQuiz);
