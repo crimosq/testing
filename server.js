@@ -47,32 +47,40 @@ app.post('/QuizPage', async (req, res) => {
   }
 });
 
-app.post('/gradeAnswers', async (req, res) => {
+app.post("/gradeAnswers", async (req, res) => {
   try {
-    const { answers, questions } = req.body;
+    const {answers, questions} = req.body;
 
-  let gradingScript = [
-      { role: "system", content: "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive." }
-    ];
-
-    questions.forEach((question, index) => {
-      gradingScript.push({
-        role: "system",
-        content: `Evaluate the following answer given from the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is no longer than 6 sentences. Answers should be graded on accuracy. Do not take spelling or grammar into account. Also provide a score from 0% - 100%, where 0% represents the lowest and 100% represents the highest score.`
-      });
+    const completionPromises = questions.map(async (question, index) => {
+      const conversation = [
+        {
+          role: "system",
+          content:
+            "As an AI designed for educational purposes, your role is to grade student answers in a way that encourages learning and development. Your feedback should be positive and constructive.",
+        },
+        {
+          role: "system",
+          content: `Evaluate the following answer given from the question: "${question}" and the student's answer: "${answers[index]}". Provide feedback that is no longer than 6 sentences. Answers should be graded on accuracy. Do not take spelling or grammar into account. Also provide a score from 0% - 100%, where 0% represents the lowest and 100% represents the highest score.`,
+        },
+        {
+          role: "user",
+          content: answers[index],
+        },
+      ];
+	  const completion = await openai.chat.completions.create({
+		model: "gpt-3.5-turbo",
+		messages: conversation,
+		max_tokens: 3510,
+	  });
+	  return completion.choices[0].message.content;
     });
+	const gradingResults = await Promise.all(completionPromises);
+	console.log(gradingResults);
+	res.json({gradingResult: gradingResults});
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: gradingScript,
-    });
-
-    const generatedMessageContent = completion.choices[0].message.content;
-
-    res.json({ gradingResult: generatedMessageContent });
   } catch (error) {
-    console.error('Error in /gradeAnswers:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error in /gradeAnswers:", error);
+    res.status(500).json({error: "Internal Server Error"});
   }
 });
 
