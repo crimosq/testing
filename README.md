@@ -23,11 +23,11 @@ To start the LRNR App, run the following commands in the project's root director
 -  node server.js:
    This command will run thee specific server-side functionality.
 
-## Additional Information 
--  Credits to the OpenAI website for providing the API that powers this application.
-
 ## Accknowledgements
 The LRNR App utilizes the OpenAI API for generating personalized programming quizzes. Special credits go to the OpenAI website for providing this API.
+
+## Additional Information 
+-  Credits to the OpenAI website for providing the API that powers this application.
 
 For more information on the OpenAI API, please refer to the [OpenAI website](https://openai.com/).
 
