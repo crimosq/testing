@@ -22,7 +22,7 @@ To start the LRNR App, run the following commands in the project's root director
 -  The LRNR App utilizes the OpenAI API for generating quizzes.
 -  Credits to the OpenAI website for providing the API that powers this application.
 
-For more information on the OpenAI API, please refer to the [OpenAI website(https://openai.com/)].
+For more information on the OpenAI API, please refer to the [OpenAI website](https://openai.com/).
 
 
 
