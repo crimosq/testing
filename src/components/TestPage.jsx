@@ -4,7 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import axios from 'axios';
 import { motion as m } from 'framer-motion';
 
-const TestPage = () => {
+const TestPage = () => {//
   const location = useLocation();
   const { state: { generatedQuiz } = {} } = location || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
