@@ -13,10 +13,10 @@ To run the LRNR App, please follow the instructions below:
 ## Usage
 To start the LRNR App, run the following commands in the project's root directory:
 -  npm start
-       This command will starrt the development server and launch the LRNR App in your  default web browser.
+  This command will starrt the development server and launch the LRNR App in your  default web browser.
    
 -  node server.js
-       This command will run thee specific server-side functionality
+  This command will run thee specific server-side functionality
 
 ## Additional Information 
 -  The LRNR App utilizes the OpenAI API for generating quizzes.
