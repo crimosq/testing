@@ -1,4 +1,4 @@
-**LRNR APP**
+# LRNR APP
 LRNR App is a website designed for educational purposes. It serves as a quiz generator to help users test their knowledge on various subjects. 
 
 ## Installation
