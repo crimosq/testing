@@ -37,8 +37,7 @@ app.post('/QuizPage', async (req, res) => {
       response_format: { type: 'text' },
     });
 
-
-    const generatedQuiz = completion.choices[0].message.content.trim("");
+    const generatedQuiz = completion.choices[0].message.content.trim('');
     console.log(`Generated quiz: ${generatedQuiz}`);
     res.send(generatedQuiz);
   } catch (error) {
@@ -72,9 +71,9 @@ app.post("/gradeAnswers", async (req, res) => {
       max_tokens: 3510,
       });
       console.log(completion.choices[0].message.content)
-	const gradingResults = completion.choices[0].message.content;
-	console.log(gradingResults);
-	res.json({gradingResult: gradingResults});
+      const gradingResults = completion.choices[0].message.content;
+      console.log(gradingResults);
+      res.json({gradingResult: gradingResults});
 
   } catch (error) {
     console.error("Error in /gradeAnswers:", error);
