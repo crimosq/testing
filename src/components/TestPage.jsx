@@ -8,20 +8,18 @@ import { motion as m } from 'framer-motion';
   const location = useLocation();
   const { state: { generatedQuiz } = {} } = location || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState({});
+  const [userAnswers, setUserAnswers] = useState('');
   const [gradingResult, setGradingResult] = useState(null);
   const totalQuestions = generatedQuiz ? generatedQuiz.split("\n").length : 0;
 
   const handleInputChange = (e) => {
-    setUserAnswers({
-      ...userAnswers,
-      [currentQuestionIndex]: e.target.value,
-    });
+    setUserAnswers(e.target.value);
   };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setUserAnswers('');
       setGradingResult(null);
     }
   };
@@ -34,8 +32,8 @@ import { motion as m } from 'framer-motion';
 
     try {
       const response = await axios.post('http://localhost:5000/gradeAnswers', {
-        answers: Object.values(userAnswers),
-        questions: questions
+        answers: userAnswers,
+        questions: questions[currentQuestionIndex]
       });
       setGradingResult(response.data.gradingResult);
     } catch (error) {
@@ -63,7 +61,7 @@ import { motion as m } from 'framer-motion';
             <input
               type="text"
               name="answer"
-              value={userAnswers[currentQuestionIndex] || ""}
+              value={userAnswers}
               onChange={handleInputChange}
             />
             <div>

@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# LRNR APP
+LRNR App is a web application designed for educational purposes in the field of programming. It provides personalized programming quizzes based on various parameters such as programming language, difficulty level, number of questions, and style of questions. The app is designed to be challenging and rewarding, with personalized subject matter experts (SMEs) to assist users.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisites
+Before running the LRNR App, please make sure you have the following:
+- Node.js installed on your machine.
+- An API key from the OpenAI website. You can sign up and obtain the API key from [OpenAI](https://openai.com/).
 
-## Available Scripts
+## Installation
+To run the LRNR App, please follow the instructions below
+  1. Clone the repository to your local machine.
+  2. Navigate to the project's root directory.
+  3. Create a `.env` file in the root directory and add the necessary environment  variables. You  can use the            following template:
+      -  OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+  4. Install the project dependencies:
+      - npm install
+        
+## Running the Application
+To start the LRNR App, run the following commands in the project's root directory:
+-  npm start:
+   This command will starrt the development server and launch the LRNR App in your  default web browser.
+   
+-  node server.js:
+   This command will run thee specific server-side functionality.
 
-In the project directory, you can run:
+## Accknowledgements
+The LRNR App utilizes the OpenAI API for generating personalized programming quizzes. Special credits go to the OpenAI website for providing this API.
 
-### `npm start`
+## Additional Information 
+-  Credits to the OpenAI website for providing the API that powers this application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+For more information on the OpenAI API, please refer to the [OpenAI website](https://openai.com/).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
