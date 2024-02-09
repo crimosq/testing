@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const apiKey = process.env.OPENAI_API_KEY; // Access the API key from environment variables
+const apiKey = process.env.API_KEY; // Access the API key from environment variables
 const openai = new OpenAI({ apiKey }); // Pass the API key to OpenAI constructor
 
 app.use(cors());
@@ -18,7 +18,6 @@ app.post('/QuizPage', async (req, res) => {
     console.log('Received form data:', { language, difficulty, number, type });
     const completion = await openai.chat.completions.create({
       messages: [
-
         { role: 'system', 
         content: `You are quiz generator with the personality of ${type}. 
         Include refrence to your of your personality in your everyday life. Expect the quiz 
@@ -31,7 +30,6 @@ app.post('/QuizPage', async (req, res) => {
         2. sentence based on your personality. question...
         etc. 
         DO NOT INCLUDE ANY SPACES BETWEEN QUESTIONS` }
-
       ],
       model: 'gpt-3.5-turbo',
       response_format: { type: 'text' },
@@ -74,14 +72,11 @@ app.post("/gradeAnswers", async (req, res) => {
       const gradingResults = completion.choices[0].message.content;
       console.log(gradingResults);
       res.json({gradingResult: gradingResults});
-
-  } catch (error) {
-    console.error("Error in /gradeAnswers:", error);
-    res.status(500).json({error: "Internal Server Error"});
-  }
+      } catch (error) {
+      console.error("Error in /gradeAnswers:", error);
+     res.status(500).json({error: "Internal Server Error"});
+    }
 });
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
