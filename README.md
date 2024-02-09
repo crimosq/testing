@@ -1,5 +1,10 @@
 # LRNR APP
-LRNR App is a website designed for educational purposes. It serves as a quiz generator to help users test their knowledge on various subjects. 
+LRNR App is a web application designed for educational purposes in the field of programming. It provides personalized programming quizzes based on various parameters such as programming language, difficulty level, number of questions, and style of questions. The app is designed to be challenging and rewarding, with personalized subject matter experts (SMEs) to assist users.
+
+## Prerequisites
+Before running the LRNR App, please make sure you have the following:
+- Node.js installed on your machine.
+- An API key from the OpenAI website. You can sign up and obtain the API key from [OpenAI](https://openai.com/).
 
 ## Installation
 To run the LRNR App, please follow the instructions below
@@ -10,7 +15,7 @@ To run the LRNR App, please follow the instructions below
   4. Install the project dependencies:
       - npm install
         
-## Usage
+## Runninfg the Application
 To start the LRNR App, run the following commands in the project's root directory:
 -  npm start:
    This command will starrt the development server and launch the LRNR App in your  default web browser.
@@ -19,8 +24,10 @@ To start the LRNR App, run the following commands in the project's root director
    This command will run thee specific server-side functionality.
 
 ## Additional Information 
--  The LRNR App utilizes the OpenAI API for generating quizzes.
 -  Credits to the OpenAI website for providing the API that powers this application.
+
+## Accknowledgements
+The LRNR App utilizes the OpenAI API for generating personalized programming quizzes. Special credits go to the OpenAI website for providing this API.
 
 For more information on the OpenAI API, please refer to the [OpenAI website](https://openai.com/).
 
