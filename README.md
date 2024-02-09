@@ -4,7 +4,7 @@ LRNR App is a website designed for educational purposes. It serves as a quiz gen
 To run the LRNR App, please follow the instructions below:
   1. Clone the repository to your local machine:
   2. Navigate to the project's root directory:
-  3. Create a `.env` file in the root directory and add the necessary environment  variables. You  can use the            following templates:
+  3. Create a `.env` file in the root directory and add the necessary environment  variables. You  can use the            following template:
       -  OPENAI_API_KEY=YOUR_OPENAI_API_KEY
   4. Install the project dependencies:
       - npm install
