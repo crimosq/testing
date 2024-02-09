@@ -15,7 +15,7 @@ To run the LRNR App, please follow the instructions below
   4. Install the project dependencies:
       - npm install
         
-## Runninfg the Application
+## Running the Application
 To start the LRNR App, run the following commands in the project's root directory:
 -  npm start:
    This command will starrt the development server and launch the LRNR App in your  default web browser.
