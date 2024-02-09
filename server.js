@@ -39,7 +39,6 @@ app.post('/QuizPage', async (req, res) => {
 
 
     const generatedQuiz = completion.choices[0].message.content.trim("");
-
     console.log(`Generated quiz: ${generatedQuiz}`);
     res.send(generatedQuiz);
   } catch (error) {
