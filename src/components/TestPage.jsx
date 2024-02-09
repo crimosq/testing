@@ -19,6 +19,7 @@ import { motion as m } from 'framer-motion';
   const handleNextQuestion = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setUserAnswers('');
       setGradingResult(null);
     }
   };
@@ -60,7 +61,7 @@ import { motion as m } from 'framer-motion';
             <input
               type="text"
               name="answer"
-              // value={userAnswers[currentQuestionIndex] || ""}
+              value={userAnswers}
               onChange={handleInputChange}
             />
             <div>
