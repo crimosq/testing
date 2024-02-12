@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./TestPage.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import axios from 'axios';
 import { motion as m } from 'framer-motion';
 import ClipLoader from "react-spinners/ClipLoader";
 
-  const TestPage = () => {
+  const TestPage = () => {//
   const location = useLocation();
   const { state: { generatedQuiz } = {} } = location || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState('');
   const [gradingResult, setGradingResult] = useState(null);
-  const totalQuestions = generatedQuiz ? generatedQuiz.split("\n").length : 0;
+  const [submittedLastQuestion, setSubmittedLastQuestion] = useState(false);
+
+  const questions = generatedQuiz ? generatedQuiz.trim().split(/\d+\.\s+/).filter(Boolean) : [];
+  const totalQuestions = questions.length;
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -30,15 +33,13 @@ import ClipLoader from "react-spinners/ClipLoader";
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setUserAnswers('');
       setGradingResult(null);
+
     }
   };
 
   const handleSubmitAnswers = async (e) => {
     e.preventDefault();
     console.log("User Answers:", userAnswers);
-
-    const questions = generatedQuiz.split(/\d+\.\s+/).filter(Boolean);
-
     try {
       const response = await axios.post('http://localhost:5000/gradeAnswers', {
         answers: userAnswers,
@@ -46,16 +47,25 @@ import ClipLoader from "react-spinners/ClipLoader";
       });
         
       setGradingResult(response.data.gradingResult);
+      if (currentQuestionIndex === totalQuestions - 1) {
+        setSubmittedLastQuestion(true);
+      }
     } catch (error) {
       console.error('Error submitting answers:', error);
     }
   };
 
+  const handleFinishTest = () => {
+    // You might want to perform any final actions here before navigating, such as submitting the last answer
+    // For simplicity, let's assume we just navigate directly
+    // Perhaps you want to do something with the gradingResult or other state before navigating
+  };
+
   return (
-    <m.div 
-    initial= {{opacity: 0}} 
-    animate= {{opacity: 1}} 
-    transition={{duration: 0.75, ease: "easeOut"}}
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
     >
     <div className="test-page">
       <m.h1
@@ -74,8 +84,8 @@ import ClipLoader from "react-spinners/ClipLoader";
          />
         :
           <form onSubmit={handleSubmitAnswers}>
-            {/* <p className="question-number">Question {currentQuestionIndex + 1}</p> */}
-            <p className="question">{generatedQuiz.split("\n")[currentQuestionIndex]}</p>
+            <p className="question-number">Question {currentQuestionIndex + 1}</p>
+            <p className="question">{questions[currentQuestionIndex]}</p>
             <input
               type="text"
               name="answer"
@@ -89,6 +99,11 @@ import ClipLoader from "react-spinners/ClipLoader";
                   Next
                 </button>
               )}
+                {submittedLastQuestion && (
+                  <Link to="/results">
+                    <button type="button" onClick={handleFinishTest}>Finish Test</button>
+                  </Link>
+                )}
             </div>
           </form>
   }
@@ -106,6 +121,4 @@ import ClipLoader from "react-spinners/ClipLoader";
     </m.div>
   );
 };
-
 export default TestPage;
-
