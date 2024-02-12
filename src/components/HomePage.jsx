@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomePage.css';
-import ResultsPage from './ResultsPage';
+// import ResultsPage from './ResultsPage';
 import { Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 

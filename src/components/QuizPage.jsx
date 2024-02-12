@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './QuizPage.css';
 import { motion as m } from 'framer-motion';
-
-// const OpenAI = require('openai');
-
 
 const QuizPage = () => {
   const navigate = useNavigate();
@@ -24,7 +21,9 @@ const QuizPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+        
       const response = await fetch('http://localhost:5000/QuizPage', {
         method: 'POST',
         headers: {
@@ -32,22 +31,23 @@ const QuizPage = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+    
       if (!response.ok) {
         throw new Error('Failed to fetch quiz data');
       }
   
       const generatedQuiz = await response.text();
       console.log('Generated Quiz:', generatedQuiz);
-  
-      // Navigate to /test and pass the generatedQuiz value in the state
+
       navigate('/test', { state: { generatedQuiz } });
+    
     } catch (error) {
       console.error('Error in handleSubmit:', error);
-      // Handle errors as needed
     }
   };
+  
   return (
+       
     <m.div 
     initial= {{opacity: 0}} 
     animate= {{opacity: 1}} 
@@ -57,7 +57,7 @@ const QuizPage = () => {
       <h1>Personalize Your Quiz</h1>
       <p>Please choose your preferences below to generate your personalized quiz</p>
       <form onSubmit={handleSubmit}>
-      <div>
+        <div>
                 <label for="language">Choose a programming topic:</label>
                 <select id="language" name="language" onChange={handleInputChange} required>
                 <option selected="true" disabled="disabled"></option>
@@ -100,7 +100,7 @@ const QuizPage = () => {
                     <option value="Captain Jack Sparrow">Captain Jack Sparrow</option>
                     <option value="Matthew McConaughey">Matthew McConaughey</option>
                 </select>
-                </div>
+            </div>
         <div>
           <button type="submit">Generate Quiz</button>
         </div>
