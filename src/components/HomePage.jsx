@@ -13,7 +13,7 @@ export default function HomePage() {
     >
       <div className="homepage-top">
         <h1>Your guided path to <span>programming enlightenment</span></h1>
-        <Link to="/results"><button>Begin Learning</button></Link>
+        <Link to="/quizPage"><button>Begin Learning</button></Link>
       </div>
 
       <div className="container">

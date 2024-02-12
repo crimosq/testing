@@ -4,7 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import axios from 'axios';
 import { motion as m } from 'framer-motion';
 
-const TestPage = () => {
+const TestPage = () => {//
   const location = useLocation();
   const { state: { generatedQuiz } = {} } = location || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -12,7 +12,6 @@ const TestPage = () => {
   const [gradingResult, setGradingResult] = useState(null);
   const [submittedLastQuestion, setSubmittedLastQuestion] = useState(false);
 
-  // Split questions after trimming to remove leading/trailing white space
   const questions = generatedQuiz ? generatedQuiz.trim().split(/\d+\.\s+/).filter(Boolean) : [];
   const totalQuestions = questions.length;
 
@@ -104,5 +103,4 @@ const TestPage = () => {
     </m.div>
   );
 };
-
 export default TestPage;
