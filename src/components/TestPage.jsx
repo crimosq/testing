@@ -1,88 +1,108 @@
 import React, { useState } from "react";
 import "./TestPage.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import axios from 'axios';
 import { motion as m } from 'framer-motion';
+
 const TestPage = () => {
   const location = useLocation();
   const { state: { generatedQuiz } = {} } = location || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState({});
+  const [userAnswers, setUserAnswers] = useState('');
   const [gradingResult, setGradingResult] = useState(null);
-  const totalQuestions = generatedQuiz ? generatedQuiz.split("\n").length : 0;
+  const [submittedLastQuestion, setSubmittedLastQuestion] = useState(false);
+
+  // Split questions after trimming to remove leading/trailing white space
+  const questions = generatedQuiz ? generatedQuiz.trim().split(/\d+\.\s+/).filter(Boolean) : [];
+  const totalQuestions = questions.length;
+
   const handleInputChange = (e) => {
-    setUserAnswers({
-      ...userAnswers,
-      [currentQuestionIndex]: e.target.value,
-    });
+    setUserAnswers(e.target.value);
   };
+
   const handleNextQuestion = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setUserAnswers('');
+      setGradingResult(null);
     }
   };
+
   const handleSubmitAnswers = async (e) => {
     e.preventDefault();
     console.log("User Answers:", userAnswers);
-    const questions = generatedQuiz.split(/\d+\.\s+/).filter(Boolean);
     try {
       const response = await axios.post('http://localhost:5000/gradeAnswers', {
-        answers: Object.values(userAnswers),
-        questions: questions
+        answers: userAnswers,
+        questions: questions[currentQuestionIndex]
       });
-
-      // Update to handle the new response structure
-      setGradingResult(response.data.correctness);
-      // Assuming you want to log the explanation in the console
-      console.log("Explanation:", response.data.explanation);
+      setGradingResult(response.data.gradingResult);
+      if (currentQuestionIndex === totalQuestions - 1) {
+        setSubmittedLastQuestion(true);
+      }
     } catch (error) {
       console.error('Error submitting answers:', error);
     }
   };
 
+  const handleFinishTest = () => {
+    // You might want to perform any final actions here before navigating, such as submitting the last answer
+    // For simplicity, let's assume we just navigate directly
+    // Perhaps you want to do something with the gradingResult or other state before navigating
+  };
+
   return (
     <m.div
-    initial= {{opacity: 0}}
-    animate= {{opacity: 1}}
-    transition={{duration: 0.75, ease: "easeOut"}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
     >
-    <div className="test-page">
-      <m.h1
-          initial= {{x: "-100%"}}
-          animate= {{x: "0%"}}
-          transition={{duration: 0.75, ease: "easeOut"}}
-      >Ready, set, GO!</m.h1>
-      {generatedQuiz ? (
-        <div>
-          <form onSubmit={handleSubmitAnswers}>
-            <p className="question-number">Question {currentQuestionIndex + 1}</p>
-            <p className="question">{generatedQuiz.split("\n")[currentQuestionIndex]}</p>
-            <input
-              type="text"
-              name="answer"
-              value={userAnswers[currentQuestionIndex] || ""}
-              onChange={handleInputChange}
-            />
-            <div>
-              {currentQuestionIndex < totalQuestions - 1 && (
-                <button type="button" onClick={handleNextQuestion}>
-                  Next
-                </button>
-              )}
-              <button type="submit">Submit</button>
-            </div>
-          </form>
-        </div>
-      ) : (
-        <p>No quiz generated.</p>
-      )}
-      {gradingResult &&
-      <div>
-        <h3>Grading Evaluation</h3>
-        <p className="graded-result">{gradingResult}</p>
-      </div>}
-    </div>
+      <div className="test-page">
+        <m.h1
+          initial={{ x: "-100%" }}
+          animate={{ x: "0%" }}
+          transition={{ duration: 0.75, ease: "easeOut" }}
+        >
+          Ready, set, GO!
+        </m.h1>
+        {generatedQuiz ? (
+          <div>
+            <form onSubmit={handleSubmitAnswers}>
+              <p className="question-number">Question {currentQuestionIndex + 1}</p>
+              <p className="question">{questions[currentQuestionIndex]}</p>
+              <input
+                type="text"
+                name="answer"
+                value={userAnswers}
+                onChange={handleInputChange}
+              />
+              <div>
+                {currentQuestionIndex < totalQuestions - 1 && (
+                  <button type="button" onClick={handleNextQuestion}>
+                    Next
+                  </button>
+                )}
+                <button type="submit">Submit</button>
+                {submittedLastQuestion && (
+                  <Link to="/results">
+                    <button type="button" onClick={handleFinishTest}>Finish Test</button>
+                  </Link>
+                )}
+              </div>
+            </form>
+          </div>
+        ) : (
+          <p>No quiz generated.</p>
+        )}
+        {gradingResult && (
+          <div>
+            <h3>Grading Evaluation</h3>
+            <p className="graded-result">{gradingResult}</p>
+          </div>
+        )}
+      </div>
     </m.div>
   );
 };
+
 export default TestPage;
