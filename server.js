@@ -69,13 +69,14 @@ app.post("/gradeAnswers", async (req, res) => {
       max_tokens: 3510,
       });
       console.log(completion.choices[0].message.content)
-      const gradingResults = completion.choices[0].message.content;
-      console.log(gradingResults);
-      res.json({gradingResult: gradingResults});
-      } catch (error) {
-      console.error("Error in /gradeAnswers:", error);
-     res.status(500).json({error: "Internal Server Error"});
-    }
+
+	const gradingResults = completion.choices[0].message.content.trim("");
+	console.log(gradingResults);
+	res.json({gradingResult: gradingResults});
+  } catch (error) {
+    console.error("Error in /gradeAnswers:", error);
+    res.status(500).json({error: "Internal Server Error"});
+  }
 });
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
