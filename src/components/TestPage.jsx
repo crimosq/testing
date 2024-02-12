@@ -74,7 +74,7 @@ import ClipLoader from "react-spinners/ClipLoader";
          />
         :
           <form onSubmit={handleSubmitAnswers}>
-            <p className="question-number">Question {currentQuestionIndex + 1}</p>
+            {/* <p className="question-number">Question {currentQuestionIndex + 1}</p> */}
             <p className="question">{generatedQuiz.split("\n")[currentQuestionIndex]}</p>
             <input
               type="text"
