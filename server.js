@@ -59,7 +59,13 @@ app.post("/gradeAnswers", async (req, res) => {
       },
       {
         role: "system",
-        content: `Evaluate the following answer given from the question: "${questions}" and the student's answer: "${answers}". Provide feedback that is no longer than 6 sentences. Answers should be graded on accuracy. Do not take spelling or grammar into account. Also provide a score from 0% - 100%, where 0% represents the lowest and 100% represents the highest score. If they say i dont know please provide a score of 0% and a feedback of "Please try to answer the question to the best of your ability. "`,
+        content: `Evaluate the following answer given from the question: "${questions}" and the student's answer: "${answers}". Provide feedback that
+         is no longer than 6 sentences. Answers should be graded on accuracy. Do not take spelling or grammar into account. Also provide a score from 
+         0% - 100%, where 0% represents the lowest and 100% represents the highest score. If they say i dont know please provide a score of 0% and a 
+         feedback of "Please try to answer the question to the best of your ability. I want you to have a grade that reflect how correct that is 0-50% if it is somewhat correct
+         50-100% if they are on the right track. If they do not quite understand the answer please provide them with aditinal resources to help them understand the concept better.
+         take these parameters into account when grading the answer.
+         1. I dont know, yes,no and anyresponse that reflect a lack of care or understanding should be given a 0% score"`,
       },
       {
         role: "user",
