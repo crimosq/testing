@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './QuizPage.css';
 import { motion as m } from 'framer-motion';
@@ -21,7 +21,9 @@ const QuizPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+        
       const response = await fetch('http://localhost:5000/QuizPage', {
         method: 'POST',
         headers: {
@@ -29,20 +31,23 @@ const QuizPage = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+    
       if (!response.ok) {
         throw new Error('Failed to fetch quiz data');
       }
   
       const generatedQuiz = await response.text();
       console.log('Generated Quiz:', generatedQuiz);
-  
+
       navigate('/test', { state: { generatedQuiz } });
+    
     } catch (error) {
       console.error('Error in handleSubmit:', error);
     }
   };
+  
   return (
+       
     <m.div 
     initial= {{opacity: 0}} 
     animate= {{opacity: 1}} 
