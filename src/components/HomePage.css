@@ -1,0 +1,189 @@
+.homepage-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage-top h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    margin: 50px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+h1 span {
+    color: #063661;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.homepage-top button {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    background: #063661;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.homepage-top button:hover {
+    opacity: 0.8;
+}
+
+.container {
+    display: flex;
+}
+  
+.box {
+    flex: 1;
+    height: auto;
+    margin: 50px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.09);
+    text-align: center;
+    color: #1A0315;
+}
+
+.box h2 {
+    padding: 10px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.box p {
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 80%;
+    margin: 0 auto 10px;
+}
+
+.box-color1 {
+    background-color: #2d70ae;
+}
+
+.box-color2 {
+    background-color: #f0aa29;
+}
+
+.box-color3 {
+    background-color: #d6546e;
+}
+
+@media only screen and (max-width: 480px) {
+    .homepage-top h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        width: 70%;
+    }
+
+    .homepage-top button {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .box {
+        margin: 10px auto;
+        width: 90%; 
+    }
+
+    .box h2 {
+        font-size: 1.2rem;
+    }
+
+    .box p {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .homepage-top h1 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        width: 60%;
+    }
+
+    .homepage-top button {
+        font-size: 1.1rem;
+        padding: 8px 14px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .box {
+        margin: 15px auto;
+        width: 80%;
+    }
+
+    .box h2 {
+        font-size: 1.3rem;
+    }
+
+    .box p {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .homepage-top h1 {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    .homepage-top button {
+        font-size: 1.3rem;
+        padding: 10px 18px;
+    }
+
+    .box {
+        margin: 20px;
+    }
+
+    .box h2 {
+        font-size: 1.5rem;
+    }
+
+    .box p {
+        font-size: 1rem;
+        padding: 15px;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1225px) {
+    .homepage-top h1 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+    }
+
+    .homepage-top button {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+    }
+
+    .box {
+        margin: 30px;
+    }
+
+    .box h2 {
+        font-size: 1.8rem;
+    }
+
+    .box p {
+        font-size: 1rem;
+        padding: 15px;
+    }
+}
