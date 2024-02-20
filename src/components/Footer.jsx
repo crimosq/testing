@@ -23,9 +23,7 @@ export default function Footer() {
     </div>
   )
 }
-<<<<<<< HEAD
+
 
 
 module.exports = Footer;
-=======
->>>>>>> 961037eb3eef88951263bfe504e7a0b523b5dfd1
