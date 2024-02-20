@@ -34,6 +34,9 @@ class NavBar extends Component {
 }
 }
 
+<<<<<<< HEAD
 module.exports = NavBar;
 
+=======
+>>>>>>> 961037eb3eef88951263bfe504e7a0b523b5dfd1
 export default NavBar;
